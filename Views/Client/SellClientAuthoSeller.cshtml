@@ -1,0 +1,107 @@
+﻿@model IEnumerable<FkjMgt_20181207.Models.ClientListViewModel>
+
+@{
+    ViewData["Title"] = "SellClientAuthoSeller";
+}
+
+<h1>SellClientAuthoSeller</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID_xf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientID_From101)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientID_FromXF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellSum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CostSum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfitSum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmpName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearMonth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FistDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LinkMan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactAddress)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID_xf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID_From101)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID_FromXF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellSum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostSum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfitSum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmpName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearMonth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FistDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkMan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactAddress)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

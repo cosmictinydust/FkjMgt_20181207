@@ -38,7 +38,16 @@ namespace FkjMgt_20181207
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<FkjDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("fkjConnect")));
+            services.AddDbContext<XfDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("XfConnect")));
+
+
             services.AddDefaultIdentity<IdentityUser>()
+
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
