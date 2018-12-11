@@ -4,101 +4,37 @@
     ViewData["Title"] = "客户列表";
 }
 
-<h3>客户销售状况列表 @DateTime.Now;</h3>
+<h4>客户销售状况列表;</h4>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeID_xf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientID_From101)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientID_FromXF)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ClientName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SellSum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CostSum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProfitSum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmpName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearMonth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FistDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LinkMan)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactAddress)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeID_xf)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientID_From101)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientID_FromXF)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SellSum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CostSum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfitSum)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearMonth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FistDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinkMan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactAddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form class="form-horizontal" role="form">
+    <fieldset>
+        <legend>查询条件</legend>
+        <div class="form-group">
+            <label class="col-md-1">部门</label>
+            <div class="col-md-3">
+                <input class="form-control" id="inputDepar" type="text" />
+            </div>
+            <label class="col-md-1">业务员</label>
+            <div class="col-md-3">
+                <input class="form-control" id="inputEmployee" type="text" />
+            </div>
+            <label class="col-md-1">客户</label>
+            <div class="col-md-3">
+                <input class="form-control" id="inputClient" type="text" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-1">开始</label>
+            <div class="col-md-3">
+                <input class="form-control" id="inputBegin" type="text" />
+            </div>
+            <label class="col-md-1">至</label>
+            <div class="col-md-3">
+                <input class="form-control" id="inputEnd" type="text" />
+            </div>
+            <div class="col-md-2">
+                <input class="btn-primary" value="查询" />
+            </div>
+        </div>
+</fieldset>
+</form>

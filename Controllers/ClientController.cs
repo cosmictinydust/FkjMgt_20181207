@@ -25,8 +25,8 @@ namespace FkjMgt_20181207.Controllers
         {
             var dataShow = new List<ClientListViewModel>();
             string StrQuery;
-            StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
-            dataShow = _context.Set<ClientListViewModel>().FromSql(StrQuery).ToList();
+            //StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
+            //dataShow = _context.Set<ClientListViewModel>().FromSql(StrQuery).ToList();
             return View(dataShow);
         }
     }
