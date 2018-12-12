@@ -1,4 +1,4 @@
-﻿@model IEnumerable<FkjMgt_20181207.Models.ClientListViewModel>
+﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
 
 @{
     ViewData["Title"] = "客户列表";
@@ -42,23 +42,22 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>客户名称</th>
-                    <th>销售</th>
-                    <th>毛利</th>
-                    <th>奖金</th>
-                    <th>业务员</th>
-                    <th>首次销售</th>
+                    <th>EmployeeID_xf</th>
+                    <th>SellSum</th>
+                    <th>CostSum</th>
+                    <th>ProfitSum</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach (var item in Model.clientListTotals)
+                {
                 <tr>
-                    <th>陆河县金春茗种植专业合作社</th>
-                    <td>3546</td>
-                    <td>894</td>
-                    <td></td>
-                    <td>卢广常</td>
-                    <td>2018-11-12</td>
+                    <td>@Html.DisplayFor(s => item.EmployeeID_xf)</td>
+                    <td>@Html.DisplayFor(s => item.SellSum)</td>
+                    <td>@Html.DisplayFor(s => item.CostSum)</td>
+                    <td>@Html.DisplayFor(s => item.ProfitSum)</td>
                 </tr>
+                }
             </tbody>
         </table>
     </div>
