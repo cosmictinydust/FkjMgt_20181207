@@ -12,5 +12,7 @@ namespace FkjMgt_20181207.Models.Client
         public decimal SellSum { get; set; }
         public decimal CostSum { get; set; }
         public decimal ProfitSum { get; set; }
+        public string EmpName { get; set; }
+        public decimal ResultSum { get; set; }
     }
 }

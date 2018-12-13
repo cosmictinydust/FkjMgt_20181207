@@ -24,23 +24,24 @@ namespace FkjMgt_20181207.Controllers
         }
         public async Task<IActionResult> SellClientAuthoSeller()
         {
-            //var dataShow = new List<ClientListViewModel>();
             string StrQuery;
             StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
-            //dataShow = _context.Set<ClientListViewModel>().FromSql(StrQuery).ToList();
             var clientDataset = new ClientListDatasetViewModels();
 
-
             clientDataset.clientListDetails = await _context.Set<ClientListDetail>().FromSql(StrQuery).ToListAsync();
-            
-            //var clientTotal = clientDataset.clientListDetails.GroupBy(emp => Math.Floor(emp.SellSum), emp => emp.EmployeeID_xf, (baseage, ags) => new
-            //{
-            //    key = baseage,
-            //    count = ags.Count(),
-            //    sum = ags.Sum()
-            //});
+
             var grouped = clientDataset.clientListDetails.GroupBy(x => x.EmployeeID_xf);
-            clientDataset.clientListTotals = grouped.Select(s => new ClientListTotal { EmployeeID_xf = s.Key, SellSum = s.Sum(t => t.SellSum), CostSum = s.Sum(t => t.CostSum), ProfitSum = s.Sum(t => t.ProfitSum) });
+
+            clientDataset.clientListTotals = grouped.Select(s =>
+                new ClientListTotal
+                {
+                    EmployeeID_xf = s.Key,
+                    SellSum = s.Sum(t => t.SellSum),
+                    CostSum = s.Sum(t => t.CostSum),
+                    ProfitSum = s.Sum(t => t.ProfitSum),
+                    EmpName=s.Max(t=>t.EmpName),
+                    ResultSum= s.Sum(t => t.ProfitSum)*(decimal)0.05
+                });
 
             return View(clientDataset);
         }
