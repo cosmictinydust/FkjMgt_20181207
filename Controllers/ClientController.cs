@@ -22,7 +22,12 @@ namespace FkjMgt_20181207.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> SellClientAuthoSeller()
+        public  ActionResult SellClientAuthoSeller()
+        {
+            var clientDataset = new ClientListDatasetViewModels();
+            return View(clientDataset);
+        }
+        public async Task<IActionResult> GetSellClientList()
         {
             string StrQuery;
             StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
@@ -39,8 +44,8 @@ namespace FkjMgt_20181207.Controllers
                     SellSum = s.Sum(t => t.SellSum),
                     CostSum = s.Sum(t => t.CostSum),
                     ProfitSum = s.Sum(t => t.ProfitSum),
-                    EmpName=s.Max(t=>t.EmpName),
-                    ResultSum= s.Sum(t => t.ProfitSum)*(decimal)0.05
+                    EmpName = s.Max(t => t.EmpName),
+                    ResultSum = s.Sum(t => t.ProfitSum) * (decimal)0.05
                 });
 
             return View(clientDataset);

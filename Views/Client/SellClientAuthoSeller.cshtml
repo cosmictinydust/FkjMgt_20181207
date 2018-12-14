@@ -39,36 +39,25 @@
         </form>
     </div>
     <div class="row">
-        <table class="table table-hover table-striped table-bordered" style="word-break:break-all; ">
-            <thead>
-                <tr>
-                    <th>客户</th>
-                    <th>首次销售</th>
-                    <th>销售</th>
-                    <th>毛利</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.clientListTotals)
-                {
-
-                    @foreach (var details in Model.clientListDetails.Where(w => w.EmployeeID_xf == item.EmployeeID_xf))
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(s => details.ClientName)</td>
-                            <td>@Html.DisplayFor(s => details.FistDate)</td>
-                            <td>@Html.DisplayFor(s => details.SellSum)</td>
-                            <td>@Html.DisplayFor(s => details.ProfitSum)</td>
-                        </tr>
-                    }
-                    <tr class="info text-info">
-                        <td>@Html.DisplayFor(s => item.EmpName)-->预计奖金:@Html.DisplayFor(s => item.ResultSum)</td>
-                        <td>小计</td>
-                        <td>@Html.DisplayFor(s => item.SellSum)</td>
-                        <td>@Html.DisplayFor(s => item.ProfitSum)</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="hidden" role="alert" id="AlertLoading">
+            <strong>运行中!</strong> 正在生成数据,请稍候...
+        </div>
+    </div>
+    @*开始显示返回结果*@
+    <div class="row" id="PartialResultClientList">
+        @await Html.PartialAsync("PartialSellClientListView", Model)
     </div>
 </div>
+
+@section scripts{ 
+<script type="text/javascript" language="JavaScript">
+    var showClinet;
+    $('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
+    $(document).ready(function () {
+        showClinet = function () {
+            $("PartialResultClientList").load('@Url.Action("SellClientAuthoSeller")');
+        }
+    });
+    $('#AlertLoading').alert('close')
+</script>
+}
