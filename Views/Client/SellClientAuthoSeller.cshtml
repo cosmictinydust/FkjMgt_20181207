@@ -1,11 +1,11 @@
-﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
+﻿@*@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels*@
 
 @{
     ViewData["Title"] = "客户列表";
 }
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" method="post">
             <fieldset>
                 <div class="form-group">
                     <label class="col-md-1">部门</label>
@@ -45,19 +45,19 @@
     </div>
     @*开始显示返回结果*@
     <div class="row" id="PartialResultClientList">
-        @await Html.PartialAsync("PartialSellClientListView", Model)
+        @await Html.PartialAsync("PartialSellClientListView")
     </div>
 </div>
 
-@section scripts{ 
-<script type="text/javascript" language="JavaScript">
-    var showClinet;
-    $('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
-    $(document).ready(function () {
-        showClinet = function () {
-            $("PartialResultClientList").load('@Url.Action("SellClientAuthoSeller")');
-        }
-    });
-    $('#AlertLoading').alert('close')
-</script>
-}
+@*@section scripts{
+    <script type="text/javascript" language="JavaScript">
+        var showClinet;
+        $('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
+        $(document).ready(function () {
+            showClinet = function () {
+                $("PartialResultClientList").load('@Url.Action("SellClientAuthoSeller")');
+            }
+        });
+        $('#AlertLoading').alert('close')
+    </script>
+    }*@

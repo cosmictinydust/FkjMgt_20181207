@@ -12,28 +12,34 @@ namespace FkjMgt_20181207.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly XfDbContext _context;
-        public ClientController(XfDbContext context)
+        private readonly XfDbContext _contextXf;
+        private readonly ApplicationDbContext _contextServer;
+        public ClientController(XfDbContext context, ApplicationDbContext context1)
         {
-            _context = context;
+            _contextXf = context;
+            _contextServer = context1;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-        public  ActionResult SellClientAuthoSeller()
+
+        public ActionResult SellClientAuthoSeller()
         {
-            var clientDataset = new ClientListDatasetViewModels();
-            return View(clientDataset);
+            var deparlists=_contextServer.DeparList.ToList<DeparList>();
+            
+            return View(deparlists);
         }
-        public async Task<IActionResult> GetSellClientList()
+
+        [HttpPost]
+        public async Task<IActionResult> SellClientAuthoSeller(string YearMonth)
         {
             string StrQuery;
             StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
             var clientDataset = new ClientListDatasetViewModels();
 
-            clientDataset.clientListDetails = await _context.Set<ClientListDetail>().FromSql(StrQuery).ToListAsync();
+            clientDataset.clientListDetails = await _contextXf.Set<ClientListDetail>().FromSql(StrQuery).ToListAsync();
 
             var grouped = clientDataset.clientListDetails.GroupBy(x => x.EmployeeID_xf);
 
@@ -47,7 +53,6 @@ namespace FkjMgt_20181207.Controllers
                     EmpName = s.Max(t => t.EmpName),
                     ResultSum = s.Sum(t => t.ProfitSum) * (decimal)0.05
                 });
-
             return View(clientDataset);
         }
     }

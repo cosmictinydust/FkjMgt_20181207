@@ -75,7 +75,6 @@ namespace FkjMgt_20181207
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

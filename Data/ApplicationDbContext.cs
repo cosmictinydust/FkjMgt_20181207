@@ -12,5 +12,7 @@ namespace FkjMgt_20181207.Data
             : base(options)
         {
         }
+        public DbSet<Models.DeparList> DeparList { set; get; }
+        public DbSet<Models.EmpList> EmpList { set; get; }
     }
 }
