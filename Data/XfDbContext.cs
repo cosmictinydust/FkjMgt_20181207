@@ -13,7 +13,7 @@ namespace FkjMgt_20181207.Data
     : base(options)
         {
         }
-        public DbSet<FkjMgt_20181207.Models.ClientListViewModel> ClientListViewModel { get; set; }
+        //public DbSet<FkjMgt_20181207.Models.ClientListViewModel> ClientListViewModel { get; set; }
         public DbSet<FkjMgt_20181207.Models.Client.ClientListDetail> ClientListDetail { get; set; }
     }
 }

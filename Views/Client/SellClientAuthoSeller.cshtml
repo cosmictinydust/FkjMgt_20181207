@@ -5,12 +5,14 @@
 }
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" method="post">
+        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-route-id="@ViewBag.DepartmentID" method="post">
             <fieldset>
                 <div class="form-group">
                     <label class="col-md-1">部门</label>
                     <div class="col-md-3">
-                        <input class="form-control-sm" id="inputDepar" type="text" />
+                        <select class="form-control-sm" id="inputDepar"  asp-items="ViewBag.DepartmentID" >
+                            <option value="">-- 全 部 --</option>
+                        </select>
                     </div>
                     <label class="col-md-1">业务员</label>
                     <div class="col-md-3">
