@@ -1,16 +1,18 @@
-﻿@*@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels*@
-
-@{
+﻿@{
     ViewData["Title"] = "客户列表";
+}
+@using FkjMgt_20181207.MyClass;
+@{
+    var showDeparList =(DeparListSelection)TempData["DeparList"];
 }
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-route-id="@ViewBag.DepartmentID" method="post">
+        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-controller="Client" method="post">
             <fieldset>
                 <div class="form-group">
                     <label class="col-md-1">部门</label>
                     <div class="col-md-3">
-                        <select class="form-control-sm" id="inputDepar"  asp-items="ViewBag.DepartmentID" >
+                        <select class="form-control-sm" id="inputDepar" asp-items="ViewBag.DeparList">
                             <option value="">-- 全 部 --</option>
                         </select>
                     </div>

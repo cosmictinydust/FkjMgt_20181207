@@ -7,6 +7,7 @@ using FkjMgt_20181207.Models;
 using FkjMgt_20181207.Models.Client;
 using FkjMgt_20181207.Data;
 using Microsoft.EntityFrameworkCore;
+using FkjMgt_20181207.MyClass;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FkjMgt_20181207.Controllers
@@ -28,12 +29,16 @@ namespace FkjMgt_20181207.Controllers
 
         public ActionResult SellClientAuthoSeller()
         {
-            ViewBag.DepartmentID = MyClass.PopulateSomethingsToList.PopulateDeparList(_contextServer);
+            ViewBag.DeparList = MyClass.PopulateSomethingsToList.PopulateDeparList(_contextServer);
+            //var viewShow = new QueryItemsViewModel(_contextServer);
+            //if (TempData["DeparList"]==null)
+            //    TempData["DeparList"] = new DeparListSelection(_contextServer);
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SellClientAuthoSeller(int deparID)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SellClientAuthoSeller(string deparName)
         {
             string StrQuery;
             StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
@@ -53,8 +58,6 @@ namespace FkjMgt_20181207.Controllers
                     EmpName = s.Max(t => t.EmpName),
                     ResultSum = s.Sum(t => t.ProfitSum) * (decimal)0.05
                 });
-            ViewBag.DepartmentID = MyClass.PopulateSomethingsToList.PopulateDeparList(_contextServer, deparID);
-            string SelectedID = Request.Form["inputDepar"].ToString();
             return View(clientDataset);
         }
     }
