@@ -1,4 +1,17 @@
 ﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
-<select class="form-control-sm" id="inputEmployee" asp-items="Model.EmpLists" asp-for="EmpID">
-    <option value="">- 全 部 -</option>
+<select class="form-control-sm" id="inputEmployee" asp-items="Model.EmpLists" asp-for="EmpID" onchange="test()">
+    <option value="0">- 全 部 -</option>
 </select>
+
+@section scripts{ 
+    <script type="text/javascript" language="JavaScript">
+        var test;
+        $(document).ready(function () {
+            test = function () {
+                alert('成功了!');
+            }
+        }
+        )
+
+    </script>
+}
