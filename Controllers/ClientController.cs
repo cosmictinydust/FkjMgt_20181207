@@ -29,20 +29,17 @@ namespace FkjMgt_20181207.Controllers
 
         public ActionResult SellClientAuthoSeller()
         {
-            ViewBag.DeparList = MyClass.PopulateSomethingsToList.PopulateDeparList(_contextServer);
-            //var viewShow = new QueryItemsViewModel(_contextServer);
-            //if (TempData["DeparList"]==null)
-            //    TempData["DeparList"] = new DeparListSelection(_contextServer);
-            return View();
+            ClientListDatasetViewModels clientDataset = new ClientListDatasetViewModels(_contextServer);
+            return View(clientDataset);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SellClientAuthoSeller(string deparName)
+        public async Task<IActionResult> SellClientAuthoSeller(string deparID)
         {
             string StrQuery;
             StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
-            var clientDataset = new ClientListDatasetViewModels();
+            var clientDataset = new ClientListDatasetViewModels(_contextServer);
 
             clientDataset.clientListDetails = await _contextXf.Set<ClientListDetail>().FromSql(StrQuery).ToListAsync();
 
@@ -58,7 +55,16 @@ namespace FkjMgt_20181207.Controllers
                     EmpName = s.Max(t => t.EmpName),
                     ResultSum = s.Sum(t => t.ProfitSum) * (decimal)0.05
                 });
+            clientDataset.DeparID = deparID;
+            clientDataset.EmpLists = MyClass.PopulateSomethingsToList.PopulateEmpList(_contextServer, Convert.ToInt16(deparID));
             return View(clientDataset);
+        }
+
+        public IActionResult GetEmpFromDepar(string deparID)
+        {
+            ClientListDatasetViewModels returnModel = new ClientListDatasetViewModels(_contextServer);
+            returnModel.EmpLists=MyClass.PopulateSomethingsToList.PopulateEmpList(_contextServer, Convert.ToInt16(deparID));
+            return PartialView("PartialEmployeeListView",returnModel);
         }
     }
 }

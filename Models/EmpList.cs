@@ -10,5 +10,6 @@ namespace FkjMgt_20181207.Models
         public int Id { get; set; }
         public string EmpName { get; set; }
         public int Id_xf { get; set; }
+        public int DeparId_xf { get; set; }
     }
 }

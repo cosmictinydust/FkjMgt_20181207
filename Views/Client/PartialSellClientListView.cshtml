@@ -1,6 +1,7 @@
 ﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
 @*@if (Model.clientListTotals!=null) {*@ 
-@if (Model != null) { 
+@if (Model.clientListDetails!=null) {
+    <h4>EmpID:@Model.EmpID; DeparID:@Model.DeparID</h4>
 <table class="table table-hover table-striped table-bordered" style="word-break:break-all; ">
     <thead>
         <tr>

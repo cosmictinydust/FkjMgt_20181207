@@ -1,25 +1,23 @@
-﻿@{
-    ViewData["Title"] = "客户列表";
-}
-@using FkjMgt_20181207.MyClass;
+﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
 @{
-    var showDeparList =(DeparListSelection)TempData["DeparList"];
+    ViewData["Title"] = "客户列表";
 }
 <div class="container-fluid">
     <div class="row">
-        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-controller="Client" method="post">
+        <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-controller="Client" asp-route-deparID="Model.DeparID" method="post">
             <fieldset>
                 <div class="form-group">
                     <label class="col-md-1">部门</label>
                     <div class="col-md-3">
-                        <select class="form-control-sm" id="inputDepar" asp-items="ViewBag.DeparList">
-                            <option value="">-- 全 部 --</option>
+                        <select class="form-control-sm" id="inputDepar" asp-items="Model.DeparLists" asp-for="DeparID" onchange="showClinetFromDepar()" >
+                            <option value="0">- 全 部 -</option>
                         </select>
                     </div>
                     <label class="col-md-1">业务员</label>
-                    <div class="col-md-3">
-                        <input class="form-control-sm" id="inputEmployee" type="text" />
+                    <div class="col-md-3" id="divShowEmployee">
+                        @await Html.PartialAsync("PartialEmployeeListView")
                     </div>
+                    <div id="abc"></div>
                     <label class="col-md-1">客户</label>
                     <div class="col-md-3">
                         <input class="form-control-sm" id="inputClient" type="text" />
@@ -53,15 +51,32 @@
     </div>
 </div>
 
-@*@section scripts{
+@section scripts{
     <script type="text/javascript" language="JavaScript">
-        var showClinet;
-        $('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
+        var showClinetFromDepar;
+        $(document).ready(function () {
+            showClinetFromDepar = function () {
+                var dearID = document.getElementById('inputDepar').value;
+                $.ajax({
+                    type:"GET",
+                    url: '@Url.Action("GetEmpFromDepar","Client")',
+                    data: { deparID:dearID},
+                    success: function (data) {
+                        $("#divShowEmployee").html(data);
+                    },
+                    failure: function () {
+                        alert('执行Js代码失败!')
+                    }
+                })
+            }
+        }
+        )
+        @*$('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
         $(document).ready(function () {
             showClinet = function () {
                 $("PartialResultClientList").load('@Url.Action("SellClientAuthoSeller")');
             }
         });
-        $('#AlertLoading').alert('close')
+        $('#AlertLoading').alert('close')*@
     </script>
-    }*@
+    }

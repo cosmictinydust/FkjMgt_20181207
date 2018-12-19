@@ -11,47 +11,45 @@ namespace FkjMgt_20181207.MyClass
 {
     public class PopulateSomethingsToList
     {
-        private readonly ApplicationDbContext _contextWebServer;
-        public PopulateSomethingsToList(ApplicationDbContext ContextWebServer)
+        /// <summary>
+        /// 取所有部门列表
+        /// </summary>
+        static public IEnumerable<SelectListItem> PopulateDeparList(ApplicationDbContext context)
         {
-            _contextWebServer = ContextWebServer;
-        }
-
-        static public SelectList PopulateDeparList(ApplicationDbContext ContextWebServer,object selectedDepar=null)
-        {
-            var deparlists = from tempData in ContextWebServer.DeparList orderby tempData.DispOrder select tempData;
-            var MyReturn = new SelectList(deparlists, "Id_xf", "DeparName", selectedDepar);
-            return MyReturn;
-        }
-        static public QueryItemsViewModel PopulationQueryItem(ApplicationDbContext ContextWebServer)
-        {
-            var returnModel = new QueryItemsViewModel();
-            returnModel.DeparLists = ContextWebServer.DeparList.ToList().Select(r => new SelectListItem
+            var returnList= context.DeparList.ToList().Select(r => new SelectListItem
             {
                 Text = r.DeparName,
                 Value = r.Id_xf.ToString()
             });
-                //returnModel.EmpLists = ContextWebServer.EmpList.ToList();
-            return returnModel;
+            return returnList;
         }
-    }
 
-    
-    public class DeparListSelection
-    {
-        private readonly ApplicationDbContext _context;
-        [BindProperty]
-        public string DeparName { get; set; }
-        public IEnumerable<SelectListItem> DeparLists { get; }
-
-        public DeparListSelection(ApplicationDbContext context)
+        /// <summary>
+        /// 取所有业务员列表
+        /// </summary>
+        static public IEnumerable<SelectListItem> PopulateEmpList(ApplicationDbContext context)
         {
-            DeparLists= context.DeparList.ToList().Select(r => new SelectListItem
+            var returnList = context.EmpList.ToList().Select(s => new SelectListItem
             {
-                Text = r.DeparName,
-                Value = r.Id_xf.ToString()
+                Text = s.EmpName,
+                Value = s.Id_xf.ToString()
             });
+            return returnList;
+        }
+        /// <summary>
+        /// 取指定部门的业务员列表
+        /// </summary>
+        static public IEnumerable<SelectListItem> PopulateEmpList(ApplicationDbContext context,int deparID)
+        {
+            var returnList= context.EmpList.ToList().Where(w => w.DeparId_xf == deparID).Select(s => new SelectListItem
+            {
+                Text = s.EmpName,
+                Value = s.Id_xf.ToString()
+            });
+            return returnList;
         }
     }
+   
+
 }
 
