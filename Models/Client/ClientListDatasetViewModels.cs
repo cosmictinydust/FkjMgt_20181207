@@ -10,28 +10,31 @@ namespace FkjMgt_20181207.Models.Client
     public class ClientListDatasetViewModels
     {
         [BindProperty]
-        public string DeparID { get; set; }
+        public string DeparID { get; set; } 
         [BindProperty]
-        public string EmpID { get; set; }
+        public string EmpID { get; set; } 
         [BindProperty]
-        public string CurrentMonth { get; set; }
+        public string CurrentMonth { get; set; } 
+        [BindProperty]
+        public string SearchName { get; set; } 
         public IEnumerable<SelectListItem> DeparLists { get; set; }
         public IEnumerable<SelectListItem> EmpLists { get; set; }
-        public List<SelectListItem> YearMonth { get; set; }
+        public IEnumerable<SelectListItem> YearMonths { get; set; }
         public IEnumerable<ClientListDetail> clientListDetails { get; set; }
         public IEnumerable<ClientListTotal> clientListTotals { get; set; }
 
         public ClientListDatasetViewModels(Data.ApplicationDbContext context)
         {
+            DeparID = "0";EmpID = "0";CurrentMonth = "";SearchName = "";
             DeparLists = MyClass.PopulateSomethingsToList.PopulateDeparList(context);
+            List<SelectListItem> TobeAdd = new List<SelectListItem>();
             string TobeYM = "";
-            //for (int i=0;i>=-2;i--)
-            //{
-            //    TobeYM = DateTime.Now.AddMonths(i).ToString("YYYYMM");
-            //    YearMonth.Add(new SelectListItem { Value = TobeYM, Text = TobeYM });
-            //}
-            var Tobe = new SelectListItem { Value = "0", Text = "abc" };
-            YearMonth.Add(Tobe);
+            for (int i = 0; i >= -5; i--)
+            {
+                TobeYM = DateTime.Now.AddMonths(i).ToString("yyyyMM");
+                TobeAdd.Add(new SelectListItem { Value = TobeYM, Text = TobeYM });
+            }
+            YearMonths = TobeAdd;
         }
     }
 }

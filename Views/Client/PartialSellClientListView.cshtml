@@ -1,36 +1,59 @@
 ﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
-@*@if (Model.clientListTotals!=null) {*@ 
-@if (Model.clientListDetails!=null) {
-    <h4>EmpID:@Model.EmpID; DeparID:@Model.DeparID</h4>
-<table class="table table-hover table-striped table-bordered" style="word-break:break-all; ">
-    <thead>
-        <tr>
-            <th>客户</th>
-            <th>首次销售</th>
-            <th>销售</th>
-            <th>毛利</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.clientListTotals)
-        {
-
-            @foreach (var details in Model.clientListDetails.Where(w => w.EmployeeID_xf == item.EmployeeID_xf))
-            {
+@*@if (Model.clientListTotals!=null) {*@
+@if (Model.clientListDetails != null)
+{
+    if (Model.clientListDetails.Count() > 0)
+    {
+        <table class="table table-hover table-striped table-bordered" style="word-break:break-all; ">
+            <thead>
                 <tr>
-                    <td>@Html.DisplayFor(s => details.ClientName)</td>
-                    <td>@Html.DisplayFor(s => details.FistDate)</td>
-                    <td>@Html.DisplayFor(s => details.SellSum)</td>
-                    <td>@Html.DisplayFor(s => details.ProfitSum)</td>
+                    <th style="text-indent:5px">客户</th>
+                    <th style="text-align:center">销售月份</th>
+                    <th style="text-align:center">销售</th>
+                    <th style="text-align:center">毛利</th>
+                    <th style="text-align:center">首次销售</th>
                 </tr>
-            }
-            <tr class="info text-info">
-                <td>@Html.DisplayFor(s => item.EmpName)-->预计奖金:@Html.DisplayFor(s => item.ResultSum)</td>
-                <td>小计</td>
-                <td>@Html.DisplayFor(s => item.SellSum)</td>
-                <td>@Html.DisplayFor(s => item.ProfitSum)</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.clientListTotals)
+                {
+
+                    @foreach (var details in Model.clientListDetails.Where(w => w.EmployeeID_xf == item.EmployeeID_xf))
+                    {
+                        <tr>
+                            <td style="text-align:left">
+                            @if (details.IsOld == 1)
+                            {
+                                <span class="glyphicon glyphicon-chevron-up" style="color:darkgray"></span>
+                            }
+                            else
+                            {
+                                <span class="glyphicon glyphicon-earphone" style="color:chartreuse"></span>
+                            }
+                            @Html.DisplayFor(s => details.ClientName)
+                            </td>
+                            <td style="text-align:center">@Html.DisplayFor(s => details.YearMonth)</td>
+                            <td style="text-align:right">@Html.DisplayFor(s => details.SellSum)</td>
+                            <td style="text-align:right">@Html.DisplayFor(s => details.ProfitSum)</td>
+                            <td style="text-align:center">@Html.DisplayFor(s=>details.FistDate)</td>
+                        </tr>
+                    }
+                    <tr class="info text-info">
+                        <td>@Html.DisplayFor(s => item.EmpName)-->预计奖金:@Html.DisplayFor(s => item.ResultSum)</td>
+                        <td style="text-align:center">小计</td>
+                        <td style="text-align:right">@Html.DisplayFor(s => item.SellSum)</td>
+                        <td style="text-align:right">@Html.DisplayFor(s => item.ProfitSum)</td>
+                        <td></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert" id="AlertLoading">
+            <strong>查找结果</strong> 没有发现符合条件的数据...
+        </div>
+
+    }
 }

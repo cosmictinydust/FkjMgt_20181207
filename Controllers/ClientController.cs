@@ -30,15 +30,17 @@ namespace FkjMgt_20181207.Controllers
         public ActionResult SellClientAuthoSeller()
         {
             ClientListDatasetViewModels clientDataset = new ClientListDatasetViewModels(_contextServer);
-            return View(clientDataset);
+             return View(clientDataset);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SellClientAuthoSeller(string deparID)
+        public async Task<IActionResult> SellClientAuthoSeller(string deparID,string empID,string currentMonth,string searchName)
         {
             string StrQuery;
-            StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = N'201812'");
+            currentMonth = currentMonth is null ? "''" : currentMonth;
+            searchName = searchName is null ? "''" : searchName;
+            StrQuery = string.Format("EXECUTE [dbo].[clientReward_QueryResult]  @yearMonthSet = {0},@deparID={1},@empID={2},@clientNamePart={3}", currentMonth,deparID,empID,searchName);
             var clientDataset = new ClientListDatasetViewModels(_contextServer);
 
             clientDataset.clientListDetails = await _contextXf.Set<ClientListDetail>().FromSql(StrQuery).ToListAsync();
@@ -56,6 +58,8 @@ namespace FkjMgt_20181207.Controllers
                     ResultSum = s.Sum(t => t.ProfitSum) * (decimal)0.05
                 });
             clientDataset.DeparID = deparID;
+            clientDataset.EmpID = empID;
+            clientDataset.CurrentMonth = currentMonth;
             clientDataset.EmpLists = MyClass.PopulateSomethingsToList.PopulateEmpList(_contextServer, Convert.ToInt16(deparID));
             return View(clientDataset);
         }
