@@ -21,21 +21,32 @@
                     @foreach (var details in Model.clientListDetails.Where(w => w.EmployeeID_xf == item.EmployeeID_xf))
                     {
                         <tr>
+                            <input type="hidden" value="@Html.DisplayFor(s=>details.Id)" />
                             <td style="text-align:left">
-                            @if (details.IsOld == 1)
-                            {
-                                <span class="glyphicon glyphicon-chevron-up" style="color:darkgray"></span>
-                            }
-                            else
-                            {
-                                <span class="glyphicon glyphicon-earphone" style="color:chartreuse"></span>
-                            }
-                            @Html.DisplayFor(s => details.ClientName)
+                                @if (details.IsOld == 1)
+                                {
+                                    <a href="#" style="text-decoration:none">
+                                        <span class="badge" style="color:aliceblue;background-color:slategrey">加</span>
+                                    </a>
+                                }
+                                else
+                                {
+                                    @*<a href="#" style="text-decoration:none" data-toggle="modal" data-target="#modalShowInfo" onclick="showClientInfo()">
+                <span class="badge" style="background-color:wheat">0</span>
+            </a>*@
+                                    <span class="badge" style="background-color:wheat">0</span>
+                                }
+                                @*<button style="border:none;background-color:transparent;text-align:left" data-container="body" data-toggle="popover" data-placement="right" data-content="联系人：@Html.DisplayFor(s=>details.LinkMan) <br/> 联系电话：@Html.DisplayFor(s=>details.ContactPhone) <br/>地址：@Html.DisplayFor(s=>details.ContactAddress)" class="btn-block">
+            @Html.DisplayFor(s => details.ClientName)
+        </button>*@
+                                <a href="#" style="text-decoration:none" data-toggle="tooltip" data-placement="right" title="联系人：@Html.DisplayFor(s=>details.LinkMan) <br/> 联系电话：@Html.DisplayFor(s=>details.ContactPhone) <br/>地址：@Html.DisplayFor(s=>details.ContactAddress)">
+                                    @Html.DisplayFor(s => details.ClientName)
+                                </a>
                             </td>
                             <td style="text-align:center">@Html.DisplayFor(s => details.YearMonth)</td>
                             <td style="text-align:right">@Html.DisplayFor(s => details.SellSum)</td>
                             <td style="text-align:right">@Html.DisplayFor(s => details.ProfitSum)</td>
-                            <td style="text-align:center">@Html.DisplayFor(s=>details.FistDate)</td>
+                            <td style="text-align:center">@Html.DisplayFor(s => details.FistDate)</td>
                         </tr>
                     }
                     <tr class="info text-info">

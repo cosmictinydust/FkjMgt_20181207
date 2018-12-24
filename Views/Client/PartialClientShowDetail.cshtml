@@ -1,0 +1,12 @@
+﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
+@if (Model.clientListDetails != null) {
+<div class="row col-md-6">
+    <span>联系人 ：</span><div>@ViewBag.LinkName</div>
+</div>
+<div class="row col-md-6">
+    <span>联系电话 ：</span><div>@ViewBag.ContactPhone</div>
+</div>
+<div class="row col-md-12">
+    <span>联系地址 ：</span><div>@ViewBag.ContactAddress</div>
+</div>
+}

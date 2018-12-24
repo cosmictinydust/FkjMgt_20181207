@@ -3,7 +3,7 @@
     ViewData["Title"] = "客户列表";
 }
 <div class="container-fluid">
-    <div class="row" style="border-bottom:1px solid #f5f5f5" >
+    <div class="row" style="border-bottom:1px solid #f5f5f5">
         <form class="form-horizontal" role="form" asp-action="SellClientAuthoSeller" asp-controller="Client" asp-route-deparID="@Model.DeparID" asp-route-empID="@Model.EmpID" asp-route-currentMonth="@Model.CurrentMonth" asp-route-searchName="@Model.SearchName" method="post">
             <fieldset>
                 <div class="form-group">
@@ -42,12 +42,29 @@
     <div class="row" id="PartialResultClientList">
         @await Html.PartialAsync("PartialSellClientListView")
     </div>
+    <!-- Modal -->
+    <div class="modal" id="modalShowInfo" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">-- 详细信息 --</h5>
+                </div>
+                <div class="modal-body container" id="divShowDetail">
+                    @await Html.PartialAsync("PartialClientShowDetail")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section scripts{
     <script type="text/javascript" language="JavaScript">
         var showClinetFromDepar;
         var ShowAlert;
+        var showClientInfo;
         $(document).ready(function () {
             showClinetFromDepar = function () {
                 var dearID = document.getElementById('inputDepar').value;
@@ -67,6 +84,22 @@
                 $('#AlertLoading').attr("class", "alert alert-warning");
                 $('#PartialResultClientList').attr("class","hidden")
             }
+            showClientInfo = function () {
+                var clientId_xf = 0;
+                @*$.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetClientInfoById", "Students")',
+                    data: { id: clientId_xf },
+                    success: function (data) {
+                        $("PartialClientShowDetail").html(data);
+                    },
+                    failure: function () {
+                        alert('执行Js代码失败!');
+                    }
+                })*@
+                clientId_xf = $("tr").find("input").value;
+                alert(clientId_xf);
+            }
         }
         )
         @*$('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
@@ -76,5 +109,14 @@
             }
         });
         $('#AlertLoading').alert('close')*@
+        $(function () {
+            $("[data-toggle='popover']").popover({
+                html: true
+            });
+        });
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip({
+                html: true
+            }); });
     </script>
     }

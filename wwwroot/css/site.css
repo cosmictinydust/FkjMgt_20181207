@@ -58,3 +58,29 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.tooltip-inner {
+    background: #fafafa !important; /*修改背景色*/
+    text-align: left !important;
+    color: #294581;
+    border: 1px solid #dedede;
+    max-width: 400px
+    /*修改背景色 text-align: left !important;
+    //字体左对齐 color:#363636 !important;
+    //字体颜色 border:1px solid #dedede;
+    //添加boder max-width: 400px !important;
+    //修改宽度*/
+}
+
+.tooltip-arrow {
+    border-bottom-color: #ffffff !important;
+    opacity: 0;
+    /*修改三角形的颜色 opacity: 0;
+    三角形透明*/
+}
+
+.tooltip {
+    opacity: 1 !important;
+    /*让整个tooltip不透明*/
+}
+
