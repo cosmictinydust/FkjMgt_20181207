@@ -21,7 +21,6 @@
                     @foreach (var details in Model.clientListDetails.Where(w => w.EmployeeID_xf == item.EmployeeID_xf))
                     {
                         <tr>
-                            <input type="hidden" value="@Html.DisplayFor(s=>details.Id)" />
                             <td style="text-align:left">
                                 @if (details.IsOld == 1)
                                 {
@@ -31,14 +30,10 @@
                                 }
                                 else
                                 {
-                                    @*<a href="#" style="text-decoration:none" data-toggle="modal" data-target="#modalShowInfo" onclick="showClientInfo()">
-                <span class="badge" style="background-color:wheat">0</span>
-            </a>*@
-                                    <span class="badge" style="background-color:wheat">0</span>
+                                    <a href="#" style="text-decoration:none" data-toggle="modal" data-target="#modalShowInfo" onclick="showClientInfo(@Html.DisplayFor(s=>details.ClientID_FromXF))">
+                                        <span class="badge" style="background-color:wheat">@Html.DisplayFor(s => details.CallBackCount)</span>
+                                    </a>
                                 }
-                                @*<button style="border:none;background-color:transparent;text-align:left" data-container="body" data-toggle="popover" data-placement="right" data-content="联系人：@Html.DisplayFor(s=>details.LinkMan) <br/> 联系电话：@Html.DisplayFor(s=>details.ContactPhone) <br/>地址：@Html.DisplayFor(s=>details.ContactAddress)" class="btn-block">
-            @Html.DisplayFor(s => details.ClientName)
-        </button>*@
                                 <a href="#" style="text-decoration:none" data-toggle="tooltip" data-placement="right" title="联系人：@Html.DisplayFor(s=>details.LinkMan) <br/> 联系电话：@Html.DisplayFor(s=>details.ContactPhone) <br/>地址：@Html.DisplayFor(s=>details.ContactAddress)">
                                     @Html.DisplayFor(s => details.ClientName)
                                 </a>

@@ -75,7 +75,7 @@ namespace FkjMgt_20181207.Controllers
         {
             //ClientListDatasetViewModels returnModel = new ClientListDatasetViewModels(_contextServer);
             //returnModel.clientListDetails = _contextXf.ClientListDetail.AsNoTracking().SingleOrDefault(w => w.Id == id);
-            //return PartialView("PartialClientShowDetail", returnModel);
+            return PartialView("PartialClientShowDetail");
         }
     }
 }

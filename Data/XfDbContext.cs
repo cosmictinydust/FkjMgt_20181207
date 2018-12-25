@@ -15,5 +15,6 @@ namespace FkjMgt_20181207.Data
         }
         //public DbSet<FkjMgt_20181207.Models.ClientListViewModel> ClientListViewModel { get; set; }
         public DbSet<FkjMgt_20181207.Models.Client.ClientListDetail> ClientListDetail { get; set; }
+        public DbSet<FkjMgt_20181207.Models.Client.CallbackList> CallbackList { get; set; }
     }
 }

@@ -42,14 +42,14 @@
     <div class="row" id="PartialResultClientList">
         @await Html.PartialAsync("PartialSellClientListView")
     </div>
-    <!-- Modal -->
+    <!-- Modal 弹出该客户的详细信息 -->
     <div class="modal" id="modalShowInfo" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalLabel">-- 详细信息 --</h5>
                 </div>
-                <div class="modal-body container" id="divShowDetail">
+                <div class="modal-body modal-content" id="divShowDetail">
                     @await Html.PartialAsync("PartialClientShowDetail")
                 </div>
                 <div class="modal-footer">
@@ -84,21 +84,19 @@
                 $('#AlertLoading').attr("class", "alert alert-warning");
                 $('#PartialResultClientList').attr("class","hidden")
             }
-            showClientInfo = function () {
+            showClientInfo = function (clientID) {
                 var clientId_xf = 0;
-                @*$.ajax({
+                $.ajax({
                     type: "GET",
                     url: '@Url.Action("GetClientInfoById", "Students")',
-                    data: { id: clientId_xf },
+                    data: { id: clientID },
                     success: function (data) {
                         $("PartialClientShowDetail").html(data);
                     },
                     failure: function () {
                         alert('执行Js代码失败!');
                     }
-                })*@
-                clientId_xf = $("tr").find("input").value;
-                alert(clientId_xf);
+                }
             }
         }
         )

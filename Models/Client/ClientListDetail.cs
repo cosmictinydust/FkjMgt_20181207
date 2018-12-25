@@ -26,5 +26,6 @@ namespace FkjMgt_20181207.Models.Client
         public string LinkMan { get; set; }
         public string ContactPhone { get; set; }
         public string ContactAddress { get; set; }
+        public int CallBackCount { get; set; }
     }
 }
