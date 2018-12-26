@@ -71,10 +71,12 @@ namespace FkjMgt_20181207.Controllers
             return PartialView("PartialEmployeeListView",returnModel);
         }
 
-        public IActionResult GetClientInfoById(int? id)
+        public async Task<IActionResult> GetClientInfoById(int? id)
         {
             //ClientListDatasetViewModels returnModel = new ClientListDatasetViewModels(_contextServer);
             //returnModel.clientListDetails = _contextXf.ClientListDetail.AsNoTracking().SingleOrDefault(w => w.Id == id);
+            var strQuery = string.Format("SELECT id AS ClientID,ISNULL(联系人,'') AS LinkMan,ISNULL(联系电话,'') AS ContactPhone,ISNULL(联系地址,'') AS ContactAdress FROM clientlist WHERE id="+id.ToString());
+            var resultData = await _contextXf.Set<CallbackList>().FromSql(strQuery).FirstOrDefaultAsync();
             return PartialView("PartialClientShowDetail");
         }
     }
