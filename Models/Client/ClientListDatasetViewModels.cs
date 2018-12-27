@@ -36,5 +36,9 @@ namespace FkjMgt_20181207.Models.Client
             }
             YearMonths = TobeAdd;
         }
+        public ClientListDatasetViewModels()
+        {
+            DeparID = "0"; EmpID = "0"; CurrentMonth = ""; SearchName = "";
+        }
     }
 }

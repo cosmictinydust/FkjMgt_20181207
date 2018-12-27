@@ -88,15 +88,15 @@
                 var clientId_xf = 0;
                 $.ajax({
                     type: "GET",
-                    url: '@Url.Action("GetClientInfoById", "Students")',
+                    url: '@Url.Action("GetClientInfoById")',
                     data: { id: clientID },
-                    success: function (data) {
-                        $("PartialClientShowDetail").html(data);
+                    success: function () {
+                        
                     },
                     failure: function () {
                         alert('执行Js代码失败!');
                     }
-                }
+                })
             }
         }
         )

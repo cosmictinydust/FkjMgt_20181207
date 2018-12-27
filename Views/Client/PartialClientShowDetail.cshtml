@@ -1,12 +1,36 @@
 ﻿@model FkjMgt_20181207.Models.Client.ClientListDatasetViewModels
-@if (Model.clientListDetails != null) {
-<div class="row col-md-6">
-    <span>联系人 ：</span><div>@ViewBag.LinkName</div>
-</div>
-<div class="row col-md-6">
-    <span>联系电话 ：</span><div>@ViewBag.ContactPhone</div>
-</div>
-<div class="row col-md-12">
-    <span>联系地址 ：</span><div>@ViewBag.ContactAddress</div>
-</div>
+@using FkjMgt_20181207.Models.Client;
+@if (Model.clientListDetails != null)
+{
+    <div class="row col-md-6">
+        <span>联系人 ：</span><div>@ViewBag.linkMan</div>
+    </div>
+    <div class="row col-md-6">
+        <span>联系电话 ：</span><div>@ViewBag.contactPhone</div>
+    </div>
+    <div class="row col-md-12">
+        <span>联系地址 ：</span><div>@ViewBag.contactAdress</div>
+    </div>
+}
+@if (ViewBag.Callbacks != null)
+{
+    <table class="table table-hover table-striped table-bordered" style="word-break:break-all; ">
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th>类型</th>
+                <th>内容</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in (IList<CallbackList>)ViewBag.Callbacks)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(s=>item.RecordDate)</td>
+                    <td>@Html.DisplayFor(s=>item.DataType)</td>
+                    <td>@Html.DisplayFor(s=>item.MemoInfo)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
