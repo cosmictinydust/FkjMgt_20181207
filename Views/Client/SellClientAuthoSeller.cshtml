@@ -46,14 +46,17 @@
     <div class="modal" id="modalShowInfo" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background-color:beige">
                     <h5 class="modal-title" id="modalLabel">-- 详细信息 --</h5>
                 </div>
-                <div class="modal-body modal-content" id="divShowDetail">
+                <div class="modal-body" id="divShowDetail">
                     @await Html.PartialAsync("PartialClientShowDetail")
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                <div class="modal-footer" style="padding-top:5px;padding-bottom:5px;text-align:center;background-color:antiquewhite">
+                    <button type="button" class="btn btn-default btn-xs" >编辑</button>
+                    <button type="button" class="btn btn-success btn-xs">增加</button>
+                    <button type="button" class="btn btn-danger btn-xs">删除</button>
+                    <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
@@ -90,8 +93,9 @@
                     type: "GET",
                     url: '@Url.Action("GetClientInfoById")',
                     data: { id: clientID },
-                    success: function () {
-                        
+                    success: function (data) {
+                        //$("#divShowDetail").load('PartialClientShowDetail');
+                        $("#divShowDetail").html(data);
                     },
                     failure: function () {
                         alert('执行Js代码失败!');
