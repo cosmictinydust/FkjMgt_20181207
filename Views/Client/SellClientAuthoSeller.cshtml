@@ -69,6 +69,7 @@
         var ShowAlert;
         var showClientInfo;
         $(document).ready(function () {
+            //根据部门列出业务员
             showClinetFromDepar = function () {
                 var dearID = document.getElementById('inputDepar').value;
                 $.ajax({
@@ -83,10 +84,12 @@
                     }
                 })
             }
+            //关闭等待窗口
             ShowAlert = function () {
                 $('#AlertLoading').attr("class", "alert alert-warning");
                 $('#PartialResultClientList').attr("class","hidden")
             }
+            //根据客户ID值显示联系人,电话地址等
             showClientInfo = function (clientID) {
                 var clientId_xf = 0;
                 $.ajax({
@@ -94,7 +97,6 @@
                     url: '@Url.Action("GetClientInfoById")',
                     data: { id: clientID },
                     success: function (data) {
-                        //$("#divShowDetail").load('PartialClientShowDetail');
                         $("#divShowDetail").html(data);
                     },
                     failure: function () {
@@ -104,13 +106,6 @@
             }
         }
         )
-        @*$('#editerrmsg').attr("class", "alert alert-warning alert-dismissible");
-        $(document).ready(function () {
-            showClinet = function () {
-                $("PartialResultClientList").load('@Url.Action("SellClientAuthoSeller")');
-            }
-        });
-        $('#AlertLoading').alert('close')*@
         $(function () {
             $("[data-toggle='popover']").popover({
                 html: true

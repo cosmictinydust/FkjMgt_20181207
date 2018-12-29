@@ -73,13 +73,22 @@ namespace FkjMgt_20181207.Controllers
 
         public async Task<IActionResult> GetClientInfoById(int? id)
         {
-            //var strQuery = string.Format("SELECT id AS ClientID,ISNULL(联系人,'') AS LinkMan,ISNULL(联系电话,'') AS ContactPhone,ISNULL(联系地址,'') AS ContactAdress FROM clientlist WHERE id="+id.ToString());
-            //var resultData = await _contextXf.Set<CallbackList>().FromSql(strQuery).FirstOrDefaultAsync();
-            var resultData = await _contextXf.ClientInfo.FromSql($"SELECT id AS ClientID,ISNULL(联系人,'') AS LinkMan,ISNULL(联系电话,'') AS ContactPhone,ISNULL(联系地址,'') AS ContactAdress FROM clientlist WHERE id={id}").FirstOrDefaultAsync();
-            ViewBag.linkMan = resultData.LinkMan.ToString().TrimEnd();
-            ViewBag.contactPhone = resultData.ContactPhone.ToString().TrimEnd();
-            ViewBag.contactAdress = resultData.ContactAdress.ToString().TrimEnd();
-            ViewBag.Callbacks = await _contextXf.CallbackList.FromSql($"SELECT  id, ClientID, DataType, recordDate, MemoInfo FROM clientRewardCallbackList WHERE ClientID={id}").ToListAsync();
+            if (id == null)
+                return NotFound();
+            if (id == 0)
+            {
+                ViewBag.linkMan = "";
+                ViewBag.contactPhone = "";
+                ViewBag.contactAdress = "";
+            }
+            else
+            {
+                var resultData = await _contextXf.ClientInfo.FromSql($"SELECT id AS ClientID,ISNULL(联系人,'') AS LinkMan,ISNULL(联系电话,'') AS ContactPhone,ISNULL(联系地址,'') AS ContactAdress FROM clientlist WHERE id={id}").FirstOrDefaultAsync();
+                ViewBag.linkMan = resultData.LinkMan.ToString().TrimEnd();
+                ViewBag.contactPhone = resultData.ContactPhone.ToString().TrimEnd();
+                ViewBag.contactAdress = resultData.ContactAdress.ToString().TrimEnd();
+                ViewBag.Callbacks = await _contextXf.CallbackList.FromSql($"SELECT  id, ClientID, DataType, recordDate, MemoInfo FROM clientRewardCallbackList WHERE ClientID={id}").ToListAsync();
+            }
             return PartialView("PartialClientShowDetail");
         }
     }
