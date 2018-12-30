@@ -9,6 +9,7 @@ using FkjMgt_20181207.Data;
 using Microsoft.EntityFrameworkCore;
 using FkjMgt_20181207.MyClass;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FkjMgt_20181207.Controllers
 {
@@ -22,17 +23,20 @@ namespace FkjMgt_20181207.Controllers
             _contextServer = context1;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize]
         public ActionResult SellClientAuthoSeller()
         {
             ClientListDatasetViewModels clientDataset = new ClientListDatasetViewModels(_contextServer);
              return View(clientDataset);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SellClientAuthoSeller(string deparID,string empID,string currentMonth,string searchName)
@@ -71,6 +75,7 @@ namespace FkjMgt_20181207.Controllers
             return PartialView("PartialEmployeeListView",returnModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> GetClientInfoById(int? id)
         {
             if (id == null)
