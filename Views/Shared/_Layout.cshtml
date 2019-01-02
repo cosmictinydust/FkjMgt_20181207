@@ -14,9 +14,6 @@
         <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
         <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-        crossorigin="anonymous"
-        integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -44,7 +41,7 @@
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
+        @*<partial name="_CookieConsentPartial" />*@
         <div class="container-fluid">
             @RenderBody()
         </div>
