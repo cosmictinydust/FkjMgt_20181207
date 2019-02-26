@@ -10,5 +10,6 @@ namespace FkjMgt_20181207.Models.Client
         public string LinkMan { get; set; }
         public string ContactPhone { get; set; }
         public string ContactAdress { get; set; }
+        public string FirstDate { get; set; }
     }
 }

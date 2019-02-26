@@ -2,16 +2,21 @@
 @using FkjMgt_20181207.Models.Client;
 <div class="col-md-6" style="margin-top:5px;margin-bottom:5px;">
     <span style="font-weight:bold">联系人 ：</span>
-    <input class="form-control-sm" id="TxtDetailLinkman" readonly value="@ViewBag.linkMan" style="border:0px;width:30%"/>
+    <input class="form-control-sm" id="TxtDetailLinkman" readonly value="@ViewBag.linkMan" style="border:0px;width:30%" />
 </div>
 <div class="col-md-6" style="margin-top:5px;margin-bottom:5px;">
-    <span style="font-weight:bold">联系电话 ：</span>@*<span>@ViewBag.contactPhone</span>*@
-    <input class="form-control-sm" id="TxtDetailContactPhone" readonly value="@ViewBag.contactPhone" style="border:0px;width:30%"/>
+    <span style="font-weight:bold">联系电话 ：</span>
+    <input class="form-control-sm" id="TxtDetailContactPhone" readonly value="@ViewBag.contactPhone" style="border:0px;width:50%" />
 </div>
 <div class="col-md-12" style="margin-top:5px;margin-bottom:5px;">
-    <span style="font-weight:bold">联系地址 ：</span>@*<span style="display:none">@ViewBag.contactAdress</span>*@
+    <span style="font-weight:bold">联系地址 ：</span>
     <input class="form-control-sm" id="TxtDetailContactAdress" readonly value="@ViewBag.contactAdress" style="border:0px;width:80%" />
 </div>
+<div class="col-md-12" style="margin-top:5px;margin-bottom:5px;">
+    <span style="font-weight:bold">首次销售日期 ：</span>
+    <input class="form-control-sm" id="TxtDetailFirstDate" readonly value="@ViewBag.firstDate" style="border:0px;width:auto" />
+</div>
+
 @if (ViewBag.Callbacks != null)
 {
     @if (ViewBag.Callbacks.Count > 0)
@@ -38,10 +43,10 @@
     }
     else
     {
-        <div style="height:50px"></div>
+        <div style="height:80px"></div>
     }
 }
 else
 {
-    <div style="height:50px"></div>
+    <div style="height:80px"></div>
 }

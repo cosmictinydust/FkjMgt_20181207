@@ -53,9 +53,9 @@
                     @await Html.PartialAsync("PartialClientShowDetail")
                 </div>
                 <div class="modal-footer" style="padding-top:5px;padding-bottom:5px;text-align:center;background-color:antiquewhite">
-                    <button type="button" class="btn btn-default btn-xs" >编辑</button>
-                    <button type="button" class="btn btn-success btn-xs">增加</button>
-                    <button type="button" class="btn btn-danger btn-xs">删除</button>
+                    <button type="button" class="btn btn-default btn-xs" onclick="ChangShowEdit()" id="BtnEdit" >编辑</button>
+                    <button type="button" class="btn btn-success btn-xs" id="BtnAdd">增加</button>
+                    <button type="button" class="btn btn-danger btn-xs" id="BtnDele">删除</button>
                     <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">关闭</button>
                 </div>
             </div>
@@ -68,7 +68,25 @@
         var showClinetFromDepar;
         var ShowAlert;
         var showClientInfo;
+        var ChangShowEdit;
         $(document).ready(function () {
+            //改变编辑按钮的状态
+            ChangShowEdit = function () {
+                if ($('#BtnEdit')[0].innerText == '编辑') {
+                    $('#BtnEdit')[0].innerText = '记录';
+                    document.getElementById("BtnAdd").disabled = true;
+                    document.getElementById("BtnDele").disabled = true;
+                    $('#TxtDetailLinkman').attr("readonly", false);
+                    $('#TxtDetailContactPhone').attr("readonly", false);
+                    $('#TxtDetailContactAdress').attr("readonly", false);
+                    $('#TxtDetailFirstDate').attr("readonly", false);
+                    $('#TxtDetailFirstDate').attr("type", "date");
+                    $('#TxtDetailLinkman').focus();
+                }
+                else {
+                    alert("准备记录!");
+                }
+            }
             //根据部门列出业务员
             showClinetFromDepar = function () {
                 var dearID = document.getElementById('inputDepar').value;
